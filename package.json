@@ -1,0 +1,21 @@
+{
+    "name": "node-arlo",
+    "version": "0.0.1",
+    "author": "David Parry <npm@introversion.com.au>",
+    "description": "JS library for Arlo",
+    "main": "./index.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/devbobo/node-arlo.git"
+    },
+    "engines": {
+        "node": ">=6.0.0"
+    },
+    "dependencies": {
+        "debug": "*",
+        "request": "*"
+    },
+    "keywords": [
+        "arlo"
+    ]
+}
