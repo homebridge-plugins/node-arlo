@@ -2,7 +2,7 @@
     "name": "node-arlo",
     "version": "0.0.1",
     "author": "David Parry <npm@introversion.com.au>",
-    "description": "JS library for Arlo",
+    "description": "JS library for Arlo Cameras",
     "main": "./index.js",
     "repository": {
         "type": "git",
