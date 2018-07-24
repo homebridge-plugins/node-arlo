@@ -1,6 +1,6 @@
 {
     "name": "node-arlo",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "author": "David Parry <npm@introversion.com.au>",
     "description": "JS library for Arlo Cameras",
     "main": "./index.js",
