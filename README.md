@@ -1,5 +1,14 @@
-# node-arlo
+<span align="center">
 
-[![npm package](https://nodei.co/npm/node-arlo.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-arlo/)
+<a href="https://arlo.com"><img alt="homebridge-arlo" src="https://raw.githubusercontent.com/homebridge-plugins/homebridge-arlo/master/arlo/arlo.png" width="140px"></a>
 
-[![donate](https://img.shields.io/badge/%24-Buy%20me%20a%20coffee-ff69b4.svg)](https://www.buymeacoffee.com/devbobo)
+# Node-Arlo
+
+<a href="https://www.npmjs.com/package/node-arlo"><img title="npm version" src="https://badgen.net/npm/v/node-arlo" ></a>
+<a href="https://www.npmjs.com/package/node-arlo"><img title="npm downloads" src="https://badgen.net/npm/dt/node-arlo" ></a>
+
+<p>JS Library for <a href="https://www.arlo.com/">Arlo</a>. 
+  
+</p>
+
+</span>
