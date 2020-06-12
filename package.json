@@ -1,12 +1,12 @@
 {
     "name": "node-arlo",
-    "version": "0.0.8",
-    "author": "David Parry <npm@introversion.com.au>",
+    "version": "1.0.0",
+    "author": "homebridge-plugins",
     "description": "JS library for Arlo Cameras",
     "main": "./index.js",
     "repository": {
         "type": "git",
-        "url": "git://github.com/devbobo/node-arlo.git"
+        "url": "git://github.com/homebridge-plugins/node-arlo.git"
     },
     "engines": {
         "node": ">=6.0.0"
@@ -16,6 +16,8 @@
         "request": "*"
     },
     "keywords": [
-        "arlo"
+        "arlo",
+        "js",
+        "node"
     ]
 }
