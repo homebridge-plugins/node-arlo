@@ -126,7 +126,7 @@ export class Arlo extends EventEmitter {
    * Get devices.
    * @param callback Callback.
    */
-  getDevices(callback?: () => {}): void {
+  getDevices(callback?: () => void): void {
     this.get(Urls.DEVICES, {}, (error, response, body) => {
       if (!body || !body.success) return;
 
