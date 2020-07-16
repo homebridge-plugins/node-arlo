@@ -9,12 +9,13 @@
         "url": "git://github.com/homebridge-plugins/node-arlo.git"
     },
     "engines": {
-        "node": ">=6.0.0"
+        "node": ">=8.15.1"
     },
     "dependencies": {
-        "debug": "*",
-        "request": "*"
-    },
+        "request": ">=2.88.2",
+        "semver": ">=7.3.2",
+        "debug": ">=4.1.1"
+      },
     "keywords": [
         "arlo",
         "js",
