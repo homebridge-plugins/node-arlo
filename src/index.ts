@@ -33,67 +33,67 @@ export class Arlo extends EventEmitter {
   /**
    * Armed mode.
    */
-  readonly ARMED = Modes.ARMED;
+  static readonly ARMED = Modes.ARMED;
 
   /**
    * Disarmed mode.
    */
-  readonly DISARMED = Modes.DISARMED;
+  static readonly DISARMED = Modes.DISARMED;
 
   /**
    * Base station device type.
    */
-  readonly BASESTATION = DeviceTypes.BASE_STATION;
+  static readonly BASESTATION = DeviceTypes.BASE_STATION;
 
   /**
    * Camera device type.
    */
-  readonly CAMERA = DeviceTypes.CAMERA;
+  static readonly CAMERA = DeviceTypes.CAMERA;
 
   /**
    * Q device type.
    */
-  readonly Q = DeviceTypes.Q;
+  static readonly Q = DeviceTypes.Q;
 
   /**
    * Siren device type.
    */
-  readonly SIREN = DeviceTypes.SIREN;
+  static readonly SIREN = DeviceTypes.SIREN;
 
   /**
    * Audio event.
    */
-  readonly AUDIO = Events.AUDIO;
+  static readonly AUDIO = Events.AUDIO;
 
   /**
    * Battery event.
    */
-  readonly BATTERY = Events.BATTERY;
+  static readonly BATTERY = Events.BATTERY;
 
   /**
    * Charging event.
    */
-  readonly CHARGING = Events.CHARGING;
+  static readonly CHARGING = Events.CHARGING;
 
   /**
    * Found event.
    */
-  readonly FOUND = Events.FOUND;
+  static readonly FOUND = Events.FOUND;
 
   /**
    * Motion event.
    */
-  readonly MOTION = Events.MOTION;
+  static readonly MOTION = Events.MOTION;
 
   /**
    * Update event.
    */
-  readonly UPDATE = Events.UPDATE;
+  static readonly UPDATE = Events.UPDATE;
 
   /**
    * Snapshot.
    */
-  readonly FF_SNAPSHOT = FF_SNAPSHOT_AVAILABLE;
+  static readonly FF_SNAPSHOT = FF_SNAPSHOT_AVAILABLE;
 
   /**
    * Devices.
