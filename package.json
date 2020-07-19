@@ -2,44 +2,18 @@
     "name": "node-arlo",
     "version": "1.2.0",
     "author": "homebridge-plugins",
-    "description": "JS library for Arlo Cameras.",
-    "main": "dist/index.js",
-    "scripts": {
-        "lint": "eslint src/**.ts",
-        "watch": "npm run build && npm link && nodemon",
-        "build": "rimraf ./dist && tsc",
-        "test": "jest",
-        "prepublishOnly": "npm run lint && npm run build"
-    },
+    "description": "JS library for Arlo Cameras",
+    "main": "./index.js",
     "repository": {
         "type": "git",
         "url": "git://github.com/homebridge-plugins/node-arlo.git"
     },
-    "bugs": {
-        "url": "https://github.com/homebridge-plugins/node-arlo/issues"
-    },
     "engines": {
-        "node": ">=8.15.1"
+        "node": ">=6.0.0"
     },
     "dependencies": {
-        "request": ">=2.88.2",
-        "semver": ">=7.3.2",
-        "debug": ">=4.1.1"
-    },
-    "devDependencies": {
-        "@types/jest": "^26.0.5",
-        "@types/node": "^14.0.14",
-        "@types/request": "^2.48.5",
-        "@typescript-eslint/eslint-plugin": "^3.4.0",
-        "@typescript-eslint/parser": "^3.4.0",
-        "eslint": "^7.3.1",
-        "eslint-plugin-jest": "^23.18.0",
-        "jest": "^26.1.0",
-        "nodemon": "^2.0.4",
-        "rimraf": "^3.0.2",
-        "ts-jest": "^26.1.3",
-        "ts-node": "^8.10.2",
-        "typescript": "^3.9.5"
+        "debug": "*",
+        "request": "*"
     },
     "keywords": [
         "arlo",
