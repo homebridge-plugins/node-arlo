@@ -1,52 +1,34 @@
-name: NodeJS
+name: Build and Lint
 
-on:
-  push:
-    branches: master
-  pull_request:
-  release: # Run when release is created
-    types: [created]
+on: [push, pull_request]
 
 jobs:
   build:
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
+        # the Node.js versions to build on
         node-version: [10.x, 12.x, 13.x]
-        os: [ubuntu-latest]
-
-    runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v2.2.0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2-beta
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }} 
+        uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: npm install, build and test
-        run: |
-          npm ci
-          npm run build --if-present
-          npm run lint
-          npm test
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint the project
+        run: npm run lint
+
+      - name: Test the project
+        run: npm run test
+
+      - name: Build the project
+        run: npm run build
         env:
           CI: true
-
-  publish-npm:
-    # publish only if we are on our own repo, event was 'release' (a tag was created) and the tag starts with "v" (aka version tag)
-    if: github.repository == 'EpicKris/node-arlo' && github.event_name == 'release' && startsWith(github.ref, 'refs/tags/v')
-
-    needs: build # only run if build succeeds
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2.2.0
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: 10 # use the minimum required version
-          registry-url: https://registry.npmjs.org/
-      - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.npm_token }}
