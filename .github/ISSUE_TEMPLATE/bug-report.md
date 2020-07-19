@@ -1,35 +1,41 @@
 ---
-name: Support Request
-about: Need help installing Node Arlo?
+name: Bug Report
+about: Raise a bug related to Node Arlo.
 title: ''
-labels: question
+labels: bug
 assignees: ''
 
 ---
 
 <!-- Provide a general summary in the Title above -->
 
-**Describe Your Problem:**
-<!-- A clear and concise description of what problem you are trying to solve. -->
+**Describe The Bug:**
+<!-- A clear and concise description of what the bug is. -->
+
+**To Reproduce:**
+<!-- Steps to reproduce the behavior. -->
+
+**Expected behavior:**
+<!-- A clear and concise description of what you expected to happen. -->
 
 [**Logs:**]()
 <!-- Please paste any relevant log output into a gist or using hastebin-->
 <!-- If using hastebin or other text sharing website please make the lifespan long-->
 <!-- Paste the link between the two () above -->
 <!-- Remove any sensitive information, passwords, etc. -->
-<!-- Please include the beginning of the log where the Node Arlo initialization happens -->
+<!-- Please include the beginning of the log where the initialization happens -->
 <!-- If needing to link multiple log files please do so between the ``` lines below -->
 
 ```
 Secondary Logs here
 ```
 
-**Homebridge Config:**
+**Config:**
 <!-- Paste relevant output between the two ``` lines below -->
 <!-- Remove any sensitive information, passwords, etc. -->
 
 ```json
-Show your homebridge config here
+Show your config here
 ```
 
 **Screenshots:**
@@ -39,7 +45,7 @@ Show your homebridge config here
 
 * **Node.js Version**: <!-- node -v -->
 * **NPM Version**: <!-- npm -v -->
-* **Homebridge Version**: <!-- node-arlo -V -->
+* **Node Arlo Version**: <!-- node-arlo -V -->
 * **Operating System**: Raspbian / Ubuntu / Debian / Windows / macOS / Docker / other
 * **Process Supervisor**: Systemd / init.d / pm2 / launchctl / Docker / hb-service / other / none
 
