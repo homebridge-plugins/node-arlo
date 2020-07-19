@@ -130,6 +130,7 @@ export class Arlo extends EventEmitter {
     this.get(Urls.DEVICES, {}, (error, response, body) => {
       if (!body || !body.success) return;
 
+      // Process base station devices first.
       for (const device of body.data) {
         switch (device.deviceType) {
           case DeviceTypes.BASE_STATION:
@@ -137,6 +138,12 @@ export class Arlo extends EventEmitter {
             this.devices[device.deviceId].subscribe();
             this.emit(Events.FOUND, this.devices[device.deviceId]);
             break;
+        }
+      }
+
+      // Then process otheer devices.
+      for (const device of body.data) {
+        switch (device.deviceType) {
           case DeviceTypes.CAMERA:
             this.devices[device.deviceId] = new Devices.Camera(this, device);
             this.emit(Events.FOUND, this.devices[device.deviceId]);
