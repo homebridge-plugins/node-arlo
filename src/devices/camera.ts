@@ -9,6 +9,26 @@ import * as Resources from "../resources";
 export class Camera extends Device {
 
   /**
+   * Download snapshot.
+   * @param url URL.
+   * @param callback Callback.
+   */
+  downloadSnapshot(url: string, callback: () => void): void {
+    this.parent.downloadSnapshot(url, callback);
+  }
+
+  /**
+   * Get.
+   */
+  get() {
+    this.parent.notify(this.device.parentId, {
+      [Actions.ACTION]: Actions.GET,
+      [Resources.RESOURCE]: `${Resources.CAMERAS}/${this.id}`,
+      [PUBLISH]: true
+    })
+  }
+
+  /**
    * Get snapshot.
    * @param callback Callback.
    */
