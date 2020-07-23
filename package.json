@@ -5,11 +5,13 @@
     "description": "JS library for Arlo Cameras.",
     "main": "dist/index.js",
     "scripts": {
-        "lint": "eslint src/**.ts",
+        "lint": "eslint src/**/*.{js,ts,json}",
         "watch": "npm run build && npm link && nodemon",
-        "build": "rimraf ./dist && tsc",
+        "build": "npm run clean && tsc",
         "test": "jest",
-        "prepublishOnly": "npm run lint && npm run build"
+        "clean": "rimraf ./dist",
+        "prepublishOnly": "npm run lint && npm run build",
+        "postpublish": "npm run clean"
     },
     "repository": {
         "type": "git",
@@ -22,9 +24,8 @@
         "node": ">=8.15.1"
     },
     "dependencies": {
-        "request": ">=2.88.2",
         "semver": ">=7.3.2",
-        "debug": ">=4.1.1"
+        "typed-rest-client": "^1.7.3"
     },
     "devDependencies": {
         "@types/jest": "^26.0.5",
