@@ -43,7 +43,7 @@ export class Arlo extends EventEmitter {
    */
   on(
     event: 'login' | 'found',
-    listener: (arg: Responses.LoginData | Record<string, Devices.Basestation | Devices.Camera | Devices.Q>) => void
+    listener: (arg: Responses.LoginData | Devices.Basestation | Devices.Camera | Devices.Q) => void
   ): this {
     return super.on(event, listener);
   }
