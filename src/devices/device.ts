@@ -21,6 +21,20 @@ export abstract class Device extends EventEmitter {
   }
 
   /**
+   * Get unique ID.
+   */
+  get uniqueId(): string {
+    return this.data.uniqueId;
+  }
+
+  /**
+   * Get name.
+   */
+  get name(): string {
+    return this.data.deviceName;
+  }
+
+  /**
    * Is error data?
    * @param data Data.
    */
