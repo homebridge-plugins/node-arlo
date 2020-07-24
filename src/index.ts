@@ -5,7 +5,6 @@ import { Subscription } from "./subscription";
 import * as Devices from "./devices";
 import * as Events from "./events";
 import * as Responses from "./responses";
-import { Device, ChildDevice } from "./devices/device";
 
 /**
  * Arlo.
@@ -141,7 +140,7 @@ export class Arlo extends EventEmitter {
       }
     });
 
-    subscription.on('modes', (from, properties) => {
+    subscription.on('modes', (from) => {
       if (this.devices[from]) {
         this.devices[from].emit(Events.MODES);
       }
@@ -186,3 +185,5 @@ export class Arlo extends EventEmitter {
     return (deviceData as Responses.ChildDeviceData).parentId !== undefined;
   }
 }
+
+export * as Responses from './responses';
