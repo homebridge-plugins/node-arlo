@@ -134,7 +134,7 @@ export class Arlo extends EventEmitter {
 
     subscription.on('cameras', (from, properties) => {
       if (properties.serialNumber) {
-        if(this.devices[properties.serialNumber]) {
+        if (this.devices[properties.serialNumber]) {
           this.devices[properties.serialNumber].emit(Events.CAMERAS, properties);
         }
       }

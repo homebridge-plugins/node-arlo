@@ -38,12 +38,12 @@ export interface FullFrameSnapshot {
    */
   properties: Properties;
 }
-  
+
 /**
  * Properties.
  */
 interface Properties {
-  
+
   /**
    * Acctive?
    */
@@ -59,44 +59,44 @@ export enum Action {
    * Get.
    */
   GET = 'get',
-  
+
   /**
    * Set.
    */
   SET = 'set'
 }
-  
+
 /**
  * Resources.
  */
 export enum Resources {
-  
+
   /**
    * Cameras.
    */
   CAMERAS = 'cameras',
-  
+
   /**
    * Moddes.
    */
   MODES = 'modes',
-    
+
   /**
    * Siren.
    */
   SIREN = 'siren',
-  
+
   /**
    * Subsccriptions.
    */
   SUBSCRIPTIONS = 'subsriptions'
 }
-  
+
 /**
  * Activity state.
  */
 export enum ActivityState {
-  
+
   /**
    * Full frame snapshot.
    */

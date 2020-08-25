@@ -56,7 +56,7 @@ describe(Basestation, () => {
   it('Should mirror name correctly', () => {
     expect(basestation.name).toBe('Basestation');
   });
-    
+
   it('Should convert to JSON', () => {
     expect(() => {
       JSON.stringify(basestation)

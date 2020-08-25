@@ -5,13 +5,13 @@ import { ErrorData } from "./errorData";
  * Devices.
  */
 export interface Devices extends Response {
-  
+
   /**
    * Data.
    */
   data: (ParentData | ChildData)[] | ErrorData;
 }
-  
+
 /**
  * Data.
  */

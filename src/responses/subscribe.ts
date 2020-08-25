@@ -7,7 +7,7 @@ export interface Chunk {
    * Event.
    */
   event: string,
-  
+
   /**
    * Data.
    */

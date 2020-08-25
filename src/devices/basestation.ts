@@ -12,7 +12,7 @@ export class Basestation extends ParentDevice {
   async sirenOn(): Promise<boolean> {
     let setSiren = false;
     try {
-        setSiren = await this.setSiren(true, 300, 8);
+      setSiren = await this.setSiren(true, 300, 8);
     } catch (error) {
       throw new Error(error);
     }
@@ -26,7 +26,7 @@ export class Basestation extends ParentDevice {
   async sirenOff(): Promise<boolean> {
     let setSiren = false;
     try {
-        setSiren = await this.setSiren(false, 300, 8);
+      setSiren = await this.setSiren(false, 300, 8);
     } catch (error) {
       throw new Error(error);
     }
@@ -44,22 +44,22 @@ export class Basestation extends ParentDevice {
     let notify: boolean | null;
     try {
       notify = await this.client.createNotify(this.data.deviceId, {
-      from: `${this.data.userId}_web`,
-      to: this.data.deviceId,
-      action: Resources.NotifyAction.SET,
-      resource: Resources.NotifyResources.SIREN,
-      publish: true,
-      properties: {
-        sirenState: state ? Resources.NotifySirenStates.ON : Resources.NotifySirenStates.OFF,
-        duration: duration,
-        volume: volume,
-        pattern: Resources.NotifyPattern.ALARM
-      }
-    }, this.data.xCloudId);
+        from: `${this.data.userId}_web`,
+        to: this.data.deviceId,
+        action: Resources.NotifyAction.SET,
+        resource: Resources.NotifyResources.SIREN,
+        publish: true,
+        properties: {
+          sirenState: state ? Resources.NotifySirenStates.ON : Resources.NotifySirenStates.OFF,
+          duration: duration,
+          volume: volume,
+          pattern: Resources.NotifyPattern.ALARM
+        }
+      }, this.data.xCloudId);
     } catch (error) {
       throw new Error(error);
     }
-  
+
     if (!notify) return false;
 
     return notify;
@@ -97,23 +97,23 @@ export class Basestation extends ParentDevice {
    * Set mode.
    * @param mode Mode.
    */
-  async setMode(mode: string | Resources.NotifyModes ): Promise<boolean> {
+  async setMode(mode: string | Resources.NotifyModes): Promise<boolean> {
     let notify: boolean | null;
     try {
       notify = await this.client.createNotify(this.data.deviceId, {
-      from: `${this.data.userId}_web`,
-      to: this.data.deviceId,
-      action: Resources.NotifyAction.SET,
-      resource: Resources.NotifyResources.MODES,
-      publish: true,
-      properties: {
-        active: mode
-      }
-    }, this.data.xCloudId);
+        from: `${this.data.userId}_web`,
+        to: this.data.deviceId,
+        action: Resources.NotifyAction.SET,
+        resource: Resources.NotifyResources.MODES,
+        publish: true,
+        properties: {
+          active: mode
+        }
+      }, this.data.xCloudId);
     } catch (error) {
       throw new Error(error);
     }
-  
+
     if (!notify) return false;
 
     return notify;

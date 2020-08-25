@@ -17,7 +17,7 @@ export interface Notify {
    * Action.
    */
   action: Action;
-  
+
   /**
    * Resources.
    */
@@ -64,7 +64,7 @@ interface SirenProperties {
    * Volume.
    */
   volume: number;
-  
+
   /**
    * Pattern.
    */
@@ -112,7 +112,7 @@ export enum Resources {
    * Moddes.
    */
   MODES = 'modes',
-  
+
   /**
    * Siren.
    */

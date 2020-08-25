@@ -52,7 +52,7 @@ describe(Camera, () => {
   it('Should mirror name correctly', () => {
     expect(camera.name).toBe('Camera');
   });
-    
+
   it('Should convert to JSON', () => {
     expect(() => {
       JSON.stringify(camera)

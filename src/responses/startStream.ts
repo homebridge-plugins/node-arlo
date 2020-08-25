@@ -5,7 +5,7 @@ import { ErrorData } from "./errorData";
  * Devices.
  */
 export interface StartStream extends Response {
-  
+
   /**
    * Data.
    */
