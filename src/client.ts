@@ -97,7 +97,7 @@ export class Client {
     response.message.addListener('data', (chunk) => {
       let data: Responses.SubscribeChunkData;
       try {
-        data = JSON.parse(chunk.replace(/^event:\s*/, '"event": "').replace(/\s*data:\s*/, '", "data": ')).data;
+        data = JSON.parse(chunk.toString().replace(/^event:\s*/, '"event": "').replace(/\s*data:\s*/, '", "data": ')).data;
       } catch (error) {
         throw new Error(error);
       }
