@@ -95,7 +95,7 @@ export interface Data {
    * Message.
    */
   message: string;
-  
+
   /**
    * Reason.
    */

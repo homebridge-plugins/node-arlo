@@ -38,17 +38,17 @@ export interface StartStream {
    */
   properties: Properties;
 }
-  
+
 /**
  * Properties.
  */
 interface Properties {
-  
+
   /**
    * Activity state.
    */
   activityState: ActivityState;
-  
+
   /**
    * Camera ID.
    */
@@ -64,44 +64,44 @@ export enum Action {
    * Get.
    */
   GET = 'get',
-  
+
   /**
    * Set.
    */
   SET = 'set'
 }
-  
+
 /**
  * Resources.
  */
 export enum Resources {
-  
+
   /**
    * Cameras.
    */
   CAMERAS = 'cameras',
-  
+
   /**
    * Moddes.
    */
   MODES = 'modes',
-    
+
   /**
    * Siren.
    */
   SIREN = 'siren',
-  
+
   /**
    * Subsccriptions.
    */
   SUBSCRIPTIONS = 'subsriptions'
 }
-  
+
 /**
  * Activity state.
  */
 export enum ActivityState {
-  
+
   /**
    * Start user stream.
    */

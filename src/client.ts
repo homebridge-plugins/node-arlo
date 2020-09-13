@@ -88,7 +88,7 @@ export class Client {
           }
         }
       });
-    } catch(error) {
+    } catch (error) {
       throw new Error(error);
     }
 

@@ -52,7 +52,7 @@ describe(Q, () => {
   it('Should mirror name correctly', () => {
     expect(q.name).toBe('Q');
   });
-    
+
   it('Should convert to JSON', () => {
     expect(() => {
       JSON.stringify(q)

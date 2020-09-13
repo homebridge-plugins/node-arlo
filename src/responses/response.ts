@@ -2,7 +2,7 @@
  * Response.
  */
 export interface Response {
-    
+
   /**
    * Success?
    */
