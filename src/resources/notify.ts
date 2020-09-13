@@ -121,7 +121,7 @@ export enum Resources {
   /**
    * Subsccriptions.
    */
-  SUBSCRIPTIONS = 'subsriptions'
+  SUBSCRIPTIONS = 'subscriptions'
 }
 
 /**
