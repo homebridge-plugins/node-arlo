@@ -3,9 +3,10 @@ import * as Events from './events';
 import * as Resources from './resources';
 import * as Responses from './responses';
 
+import { Handler } from './clientHandler';
+
 import { RestClient, IRestResponse } from 'typed-rest-client';
 import { IHttpClientResponse } from 'typed-rest-client/Interfaces'
-import { PersonalAccessTokenCredentialHandler } from 'typed-rest-client/Handlers';
 
 /**
  * Client.
@@ -20,7 +21,7 @@ export class Client {
   /**
    * Handler.
    */
-  handler = new PersonalAccessTokenCredentialHandler('');
+  handler = new Handler('');
 
   /**
    * Client constructor.
