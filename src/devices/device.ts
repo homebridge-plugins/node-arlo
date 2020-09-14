@@ -21,6 +21,13 @@ export abstract class Device extends EventEmitter {
   }
 
   /**
+   * Get ID.
+   */
+  get id(): string {
+    return this.data.deviceId;
+  }
+
+  /**
    * Get unique ID.
    */
   get uniqueId(): string {
@@ -39,6 +46,32 @@ export abstract class Device extends EventEmitter {
    */
   get name(): string {
     return this.data.deviceName;
+  }
+
+  /**
+   * Get model ID.
+   */
+  get modelId(): string {
+    return this.data.modelId;
+  }
+
+  /**
+   * Get hardware version.
+   */
+  get hardwareVersion(): string {
+    return this.data.properties.hwVersion;
+  }
+
+  /**
+   * On.
+   * @param event Event.
+   * @param listener Listener.
+   */
+  on(
+    event: 'camera' | 'hardwareVersion' | 'mode' | 'modelId' | 'serialNumber' | 'softwareVersion' | 'subscription' | 'default',
+    listener: (from: string, arg: Responses.SubscribeProperties | string) => void
+  ): this {
+    return super.on(event, listener);
   }
 
   /**
@@ -65,6 +98,13 @@ export abstract class ParentDevice extends Device {
     protected readonly data: Responses.ParentDeviceData
   ) {
     super(client, data);
+  }
+
+  /**
+   * Get firmware version.
+   */
+  get firmwareVersion(): string {
+    return this.data.firmwareVersion;
   }
 }
 
