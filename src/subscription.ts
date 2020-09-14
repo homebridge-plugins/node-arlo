@@ -12,7 +12,10 @@ export class Subscription extends EventEmitter {
    * @param event Event.
    * @param listener Listener.
    */
-  on(event: 'cameras' | 'modes' | 'default', listener: (from: string, properties: SubscribeProperties) => void): this {
+  on(
+    event: 'cameras' | 'modes' | 'subscriptions' | 'default',
+    listener: (from: string, properties: SubscribeProperties | SubscribeProperties[]) => void
+  ): this {
     return super.on(event, listener);
   }
 }
