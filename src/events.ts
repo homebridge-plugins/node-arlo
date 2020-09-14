@@ -4,7 +4,12 @@
 export const DEFAULT = 'default';
 
 /**
- * Found event.
+ * Camera event.
+ */
+export const CAMERA = 'camera';
+
+/**
+ * Cameras event.
  */
 export const CAMERAS = 'cameras';
 
@@ -14,11 +19,46 @@ export const CAMERAS = 'cameras';
 export const FOUND = 'found';
 
 /**
- * Modes event.
+ * Hardware version.
  */
-export const MODES = 'modes';
+export const HARDWARE_VERSION = 'hardwareVersion';
 
 /**
  * Login event.
  */
 export const LOGIN = 'login';
+
+/**
+ * Mode event.
+ */
+export const MODE = 'mode';
+
+/**
+ * Model ID event.
+ */
+export const MODEL_ID = 'modelId';
+
+/**
+ * Modes event.
+ */
+export const MODES = 'modes';
+
+/**
+ * Serial number event.
+ */
+export const SERIAL_NUMBER = 'serialNumber';
+
+/**
+ * Software version event.
+ */
+export const SOFTWARE_VERSION = 'softwareVersion';
+
+/**
+ * Subscription event.
+ */
+export const SUBSCRIPTION = 'subscription';
+
+/**
+ * Subscriptions event.
+ */
+export const SUBSCRIPTIONS = 'subscriptions';
