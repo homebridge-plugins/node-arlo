@@ -2,7 +2,7 @@ import { Basestation } from './basestation';
 import { Client } from '../client';
 import { ParentDeviceData, DeviceTypes } from '../responses';
 
-describe(Basestation, () => {
+describe('Basestation Device', () => {
 
   const client = new Client();
   const deviceData: ParentDeviceData = {

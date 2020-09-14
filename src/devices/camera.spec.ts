@@ -2,7 +2,7 @@ import { Camera } from './camera';
 import { Client } from '../client';
 import { ChildDeviceData, DeviceTypes } from '../responses';
 
-describe(Camera, () => {
+describe('Camera Device', () => {
 
   const client = new Client();
   const deviceData: ChildDeviceData = {

@@ -1,3 +1,5 @@
+import { RequestOptions } from 'http';
+
 import { PersonalAccessTokenCredentialHandler } from 'typed-rest-client/Handlers';
 
 /**
@@ -17,7 +19,9 @@ export class Handler extends PersonalAccessTokenCredentialHandler {
    * Prepare request.
    * @param options Options.
    */
-  prepareRequest(options: any): void {
+  prepareRequest(options: RequestOptions): void {
+    if (!options.headers) options.headers = {};
+
     options.headers['Authorization'] = this.token;
     options.headers['X-TFS-FedAuthRedirect'] = 'Suppress';
   }

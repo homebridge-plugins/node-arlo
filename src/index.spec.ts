@@ -1,6 +1,6 @@
 import { Arlo } from '.';
 
-describe(Arlo, () => {
+describe('Arlo', () => {
 
   it('Should convert to JSON', () => {
     const arlo = new Arlo();

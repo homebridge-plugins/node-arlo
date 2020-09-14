@@ -2,7 +2,7 @@ import { Q } from './q';
 import { Client } from '../client';
 import { ChildDeviceData, DeviceTypes } from '../responses';
 
-describe(Q, () => {
+describe('Q Device', () => {
 
   const client = new Client();
   const deviceData: ChildDeviceData = {
