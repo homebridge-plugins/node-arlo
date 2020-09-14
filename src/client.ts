@@ -30,7 +30,7 @@ export class Client {
    */
   constructor(
     private readonly userAgent = 'node-arlo',
-    private readonly baseUrl = 'https://arlo.netgear.com/hmsweb'
+    private readonly baseUrl = 'https://myapi.arlo.com/hmsweb'
   ) {
     this.restClient = new RestClient(userAgent, baseUrl, [this.handler]);
   }
