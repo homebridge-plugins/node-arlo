@@ -57,8 +57,6 @@ describe(Camera, () => {
     expect(camera.name).toBe('Camera');
   });
 
-<<<<<<< Updated upstream
-=======
   it('Should mirror model ID correctly', () => {
     expect(camera.modelId).toBe('MODEL-ID');
   });
@@ -67,7 +65,6 @@ describe(Camera, () => {
     expect(camera.hardwareVersion).toBe('v0.0.0');
   });
     
->>>>>>> Stashed changes
   it('Should convert to JSON', () => {
     expect(() => {
       JSON.stringify(camera)

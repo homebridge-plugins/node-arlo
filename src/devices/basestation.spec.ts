@@ -61,8 +61,6 @@ describe(Basestation, () => {
     expect(basestation.name).toBe('Basestation');
   });
 
-<<<<<<< Updated upstream
-=======
   it('Should mirror model ID correctly', () => {
     expect(basestation.modelId).toBe('MODEL-ID');
   });
@@ -75,7 +73,6 @@ describe(Basestation, () => {
     expect(basestation.firmwareVersion).toBe('v0.0.0');
   });
     
->>>>>>> Stashed changes
   it('Should convert to JSON', () => {
     expect(() => {
       JSON.stringify(basestation)
