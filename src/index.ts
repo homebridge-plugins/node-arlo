@@ -42,7 +42,7 @@ export class Arlo extends EventEmitter {
    */
   on(
     event: 'login' | 'found',
-    listener: (arg: Responses.LoginData | Devices.Basestation | Devices.Camera | Devices.Q) => void
+    listener: (arg: Responses.LoginData & (Devices.Basestation | Devices.Camera | Devices.Q)) => void
   ): this {
     return super.on(event, listener);
   }
@@ -133,24 +133,64 @@ export class Arlo extends EventEmitter {
     const subscription = await this.client.getSubscribe();
 
     subscription.on('cameras', (from, properties) => {
+<<<<<<< Updated upstream
       if (properties.serialNumber) {
         if (this.devices[properties.serialNumber]) {
           this.devices[properties.serialNumber].emit(Events.CAMERAS, properties);
         }
       }
+=======
+      this.subscriptionEvent(from, properties, Events.CAMERA);
+>>>>>>> Stashed changes
     });
 
-    subscription.on('modes', (from) => {
-      if (this.devices[from]) {
-        this.devices[from].emit(Events.MODES);
-      }
+    subscription.on('modes', (from, properties) => {
+      this.subscriptionEvent(from, properties, Events.MODE);
+    });
+
+    subscription.on('subscriptions', (from, properties) => {
+      this.subscriptionEvent(from, properties, Events.SUBSCRIPTION);
     });
 
     subscription.on('default', (from, properties) => {
-      // TODO
+      this.subscriptionEvent(from, properties, Events.DEFAULT);
     });
 
     return subscription;
+  }
+
+  /**
+   * Subscription event.
+   * @param from From.
+   * @param properties Properties.
+   * @param event Event.
+   */
+  private subscriptionEvent(from: string, properties: Responses.SubscribeProperties | Responses.SubscribeProperties[], event: string) {
+    if (!Array.isArray(properties)) {
+      properties = [properties];
+    }
+
+    for (const property of properties) {
+      if(this.devices[from]) {
+        this.devices[from].emit(event, property);
+
+        if (property.hwVersion) {
+          this.devices[from].emit(Events.HARDWARE_VERSION, property.hwVersion);
+        }
+
+        if (property.modelId) {
+          this.devices[from].emit(Events.MODEL_ID, property.modelId);
+        }
+
+        if (property.serialNumber) {
+          this.devices[from].emit(Events.SERIAL_NUMBER, property.serialNumber);
+        }
+
+        if (property.swVersion) {
+          this.devices[from].emit(Events.SOFTWARE_VERSION, property.swVersion);
+        }
+      }
+    }
   }
 
   /**
