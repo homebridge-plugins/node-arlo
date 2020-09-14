@@ -78,9 +78,10 @@ export class Client {
   /**
    * Get subscribe.
    */
-  async getSubscribe(): Promise<Subscription> {
+  async getSubscribe(subscription = new Subscription()): Promise<Subscription> {
     let response: IHttpClientResponse;
     try {
+      this.restClient.client.requestOptions.keepAlive = true;
       response = await this.restClient.client.get(`client/subscribe`, {
         acceptHeader: 'text/event-stream',
         queryParameters: {
@@ -91,9 +92,9 @@ export class Client {
       });
     } catch (error) {
       throw new Error(error);
+    } finally {
+      this.restClient.client.requestOptions.keepAlive = false;
     }
-
-    const subscription = new Subscription();
 
     response.message.addListener('data', (chunk) => {
       let data: Responses.SubscribeChunkData;
@@ -103,16 +104,27 @@ export class Client {
         throw new Error(error);
       }
 
-      switch (data.resource) {
-        case 'cameras':
-          subscription.emit(Events.CAMERAS, data.from, data.properties);
-          break;
-        case 'modes':
-          subscription.emit(Events.MODES, data.from, data.properties);
-          break;
-        default:
-          subscription.emit(Events.DEFAULT, data.from, data.properties);
+      if (data.resource) {
+        const resources = data.resource.split('/');
+
+        switch (resources[0]) {
+          case 'cameras':
+            subscription.emit(Events.CAMERAS, data.from, data.properties);
+            break;
+          case 'modes':
+            subscription.emit(Events.MODES, data.from, data.properties);
+            break;
+          case 'subscriptions':
+            subscription.emit(Events.SUBSCRIPTIONS, data.from, data.properties);
+            break;
+          default:
+            subscription.emit(Events.DEFAULT, data.from, data.properties);
+        }
       }
+    });
+    
+    response.message.addListener('close', () => {
+      this.getSubscribe(subscription);
     });
 
     return subscription;
