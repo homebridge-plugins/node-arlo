@@ -119,7 +119,7 @@ export enum Resources {
   SIREN = 'siren',
 
   /**
-   * Subsccriptions.
+   * Subscriptions.
    */
   SUBSCRIPTIONS = 'subscriptions'
 }
