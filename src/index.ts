@@ -133,15 +133,7 @@ export class Arlo extends EventEmitter {
     const subscription = await this.client.getSubscribe();
 
     subscription.on('cameras', (from, properties) => {
-<<<<<<< Updated upstream
-      if (properties.serialNumber) {
-        if (this.devices[properties.serialNumber]) {
-          this.devices[properties.serialNumber].emit(Events.CAMERAS, properties);
-        }
-      }
-=======
       this.subscriptionEvent(from, properties, Events.CAMERA);
->>>>>>> Stashed changes
     });
 
     subscription.on('modes', (from, properties) => {
