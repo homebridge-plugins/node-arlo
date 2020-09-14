@@ -61,9 +61,24 @@ export interface ChunkData {
 export interface Properties {
 
   /**
+   * Model ID.
+   */
+  modelId?: string;
+
+  /**
    * Serial number.
    */
   serialNumber?: string;
+
+  /**
+   * Software version.
+   */
+  swVersion?: string;
+
+  /**
+   * Hardware version.
+   */
+  hwVersion?: string;
 
   /**
    * Active mode.
