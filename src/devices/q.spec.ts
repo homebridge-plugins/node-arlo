@@ -41,6 +41,10 @@ describe(Q, () => {
   };
   const q = new Q(client, deviceData);
 
+  it('Should mirror ID correctly', () => {
+    expect(q.id).toBe('DEVICE-ID');
+  });
+
   it('Should mirror unique ID correctly', () => {
     expect(q.uniqueId).toBe('UNIQUE-ID');
   });
@@ -53,6 +57,17 @@ describe(Q, () => {
     expect(q.name).toBe('Q');
   });
 
+<<<<<<< Updated upstream
+=======
+  it('Should mirror model ID correctly', () => {
+    expect(q.modelId).toBe('MODEL-ID');
+  });
+
+  it('Should mirror hardware version correctly', () => {
+    expect(q.hardwareVersion).toBe('v0.0.0');
+  });
+    
+>>>>>>> Stashed changes
   it('Should convert to JSON', () => {
     expect(() => {
       JSON.stringify(q)
