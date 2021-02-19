@@ -37,7 +37,7 @@ export abstract class Device extends EventEmitter {
   /**
    * Get type.
    */
-  get type(): Responses.DeviceTypes {
+  get type(): Responses.DeviceType {
     return this.data.deviceType;
   }
 

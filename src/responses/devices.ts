@@ -35,7 +35,7 @@ interface Data {
   /**
    * Device type.
    */
-  deviceType: DeviceTypes;
+  deviceType: DeviceType;
 
   /**
    * Device name.
@@ -234,7 +234,7 @@ interface Connectivity {
 /**
  * Device types.
  */
-export enum DeviceTypes {
+export enum DeviceType {
 
   /**
    * Basestation.

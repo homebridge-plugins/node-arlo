@@ -1,6 +1,6 @@
 import { Q } from './q';
 import { Client } from '../client';
-import { ChildDeviceData, DeviceTypes } from '../responses';
+import { ChildDeviceData, DeviceType } from '../responses';
 
 describe('Q Device', () => {
 
@@ -9,7 +9,7 @@ describe('Q Device', () => {
     userId: 'USER-ID',
     deviceId: 'DEVICE-ID',
     uniqueId: 'UNIQUE-ID',
-    deviceType: DeviceTypes.Q,
+    deviceType: DeviceType.Q,
     deviceName: 'Q',
     lastModified: new Date(),
     xCloudId: 'X-CLOUD-ID',
@@ -50,7 +50,7 @@ describe('Q Device', () => {
   });
 
   it('Should mirror type correctly', () => {
-    expect(q.type).toBe(DeviceTypes.Q);
+    expect(q.type).toBe(DeviceType.Q);
   });
 
   it('Should mirror name correctly', () => {

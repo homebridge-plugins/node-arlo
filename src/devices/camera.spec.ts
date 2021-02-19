@@ -1,6 +1,6 @@
 import { Camera } from './camera';
 import { Client } from '../client';
-import { ChildDeviceData, DeviceTypes } from '../responses';
+import { ChildDeviceData, DeviceType } from '../responses';
 
 describe('Camera Device', () => {
 
@@ -9,7 +9,7 @@ describe('Camera Device', () => {
     userId: 'USER-ID',
     deviceId: 'DEVICE-ID',
     uniqueId: 'UNIQUE-ID',
-    deviceType: DeviceTypes.CAMERA,
+    deviceType: DeviceType.CAMERA,
     deviceName: 'Camera',
     lastModified: new Date(),
     xCloudId: 'X-CLOUD-ID',
@@ -50,7 +50,7 @@ describe('Camera Device', () => {
   });
 
   it('Should mirror type correctly', () => {
-    expect(camera.type).toBe(DeviceTypes.CAMERA);
+    expect(camera.type).toBe(DeviceType.CAMERA);
   });
 
   it('Should mirror name correctly', () => {
