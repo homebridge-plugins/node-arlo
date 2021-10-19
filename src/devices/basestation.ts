@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ParentDevice } from "./device";
 import * as Resources from "../resources";
 
@@ -13,7 +14,7 @@ export class Basestation extends ParentDevice {
     let setSiren = false;
     try {
       setSiren = await this.setSiren(true, 300, 8);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -27,7 +28,7 @@ export class Basestation extends ParentDevice {
     let setSiren = false;
     try {
       setSiren = await this.setSiren(false, 300, 8);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -56,7 +57,7 @@ export class Basestation extends ParentDevice {
           pattern: Resources.NotifyPattern.ALARM
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -72,7 +73,7 @@ export class Basestation extends ParentDevice {
     let setMode = false;
     try {
       setMode = await this.setMode(Resources.NotifyModes.ARMED);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -86,7 +87,7 @@ export class Basestation extends ParentDevice {
     let setMode = false;
     try {
       setMode = await this.setMode(Resources.NotifyModes.DISARMED);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -110,7 +111,7 @@ export class Basestation extends ParentDevice {
           active: mode
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -135,7 +136,7 @@ export class Basestation extends ParentDevice {
           devices: [this.data.deviceId]
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 

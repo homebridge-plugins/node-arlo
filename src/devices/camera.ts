@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ChildDevice } from "./device";
 import * as Responses from "../responses";
 import * as Resources from "../resources";
@@ -20,7 +21,7 @@ export class Camera extends ChildDevice {
         resource: `${Resources.NotifyResources.CAMERAS}/${this.data.deviceId}`,
         publish: true
       }, this.data.xCloudId)
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -46,7 +47,7 @@ export class Camera extends ChildDevice {
           activityState: Resources.FullFrameSnapshotActivityState.FULL_FRAME_SNAPSHOT
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -73,7 +74,7 @@ export class Camera extends ChildDevice {
           cameraId: this.data.deviceId
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -97,7 +98,7 @@ export class Camera extends ChildDevice {
         publish: true,
         properties: properties
       }, this.data.xCloudId)
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -116,7 +117,7 @@ export class Camera extends ChildDevice {
       set = await this.set({
         privacyActive: active
       });
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Client } from "../client";
 import { ChildDevice } from "./device";
 import * as Responses from "../responses";
@@ -15,7 +16,7 @@ export class Q extends ChildDevice {
     let setSiren = false;
     try {
       setSiren = await this.setSiren(true, 300, 8);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -29,7 +30,7 @@ export class Q extends ChildDevice {
     let setSiren = false;
     try {
       setSiren = await this.setSiren(false, 300, 8);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -58,7 +59,7 @@ export class Q extends ChildDevice {
           pattern: Resources.NotifyPattern.ALARM
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -74,7 +75,7 @@ export class Q extends ChildDevice {
     let setMode = false;
     try {
       setMode = await this.setMode(Resources.NotifyModes.ARMED);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -88,7 +89,7 @@ export class Q extends ChildDevice {
     let setMode = false;
     try {
       setMode = await this.setMode(Resources.NotifyModes.DISARMED);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -112,7 +113,7 @@ export class Q extends ChildDevice {
           active: mode
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -137,7 +138,7 @@ export class Q extends ChildDevice {
           devices: [this.data.deviceId]
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -171,7 +172,7 @@ export class Q extends ChildDevice {
         resource: `${Resources.NotifyResources.CAMERAS}/${this.data.deviceId}`,
         publish: true
       }, this.data.xCloudId)
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -197,7 +198,7 @@ export class Q extends ChildDevice {
           activityState: Resources.FullFrameSnapshotActivityState.FULL_FRAME_SNAPSHOT
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -224,7 +225,7 @@ export class Q extends ChildDevice {
           cameraId: this.data.deviceId
         }
       }, this.data.xCloudId);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -248,7 +249,7 @@ export class Q extends ChildDevice {
         publish: true,
         properties: properties
       }, this.data.xCloudId)
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -267,7 +268,7 @@ export class Q extends ChildDevice {
       set = await this.set({
         privacyActive: active
       });
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 

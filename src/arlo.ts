@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { EventEmitter } from "events";
 
 import { Logger } from "@epickris/node-logger";
@@ -63,7 +64,7 @@ export class Arlo extends EventEmitter {
     let login: Responses.Login | null;
     try {
       login = await this.client.createLogin(email, password);
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -84,7 +85,7 @@ export class Arlo extends EventEmitter {
     let devices: Responses.Devices | null;
     try {
       devices = await this.client.getDevices();
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 

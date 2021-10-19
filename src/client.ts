@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Subscription } from './subscription';
 import * as Events from './events';
 import * as Resources from './resources';
@@ -54,7 +55,7 @@ export class Client {
         email: email,
         password: password
       });
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -68,7 +69,7 @@ export class Client {
     let response: IRestResponse<Responses.Devices>;
     try {
       response = await this.restClient.get('users/devices');
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -90,7 +91,7 @@ export class Client {
           }
         }
       });
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     } finally {
       this.restClient.client.requestOptions.keepAlive = false;
@@ -100,7 +101,7 @@ export class Client {
       let data: Responses.SubscribeChunkData;
       try {
         data = JSON.parse(chunk.toString().replace(/^event:\s*/, '"event": "').replace(/\s*data:\s*/, '", "data": ')).data;
-      } catch (error) {
+      } catch (error: any) {
         throw new Error(error);
       }
 
@@ -143,7 +144,7 @@ export class Client {
           xCloudId: xCloudId
         }
       });
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -166,7 +167,7 @@ export class Client {
           xCloudId: xCloudId
         }
       });
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
@@ -188,7 +189,7 @@ export class Client {
           xCloudId: xCloudId
         }
       })
-    } catch (error) {
+    } catch (error: any) {
       throw new Error(error);
     }
 
