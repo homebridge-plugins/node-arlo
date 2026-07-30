@@ -101,7 +101,7 @@ jobs:
             -f tag_name="v${{ steps.pkg-version.outputs.version }}" \
             --jq '.body' 2>/dev/null || echo "")
           if [[ -z "$NOTES" ]]; then
-            echo "::warning::Could not auto-generate release notes (possibly due to workflow-file permission restriction); falling back to empty notes"
+            echo "::warning::Could not auto-generate release notes; falling back to empty notes"
           fi
           {
             echo "notes<<EOF"
@@ -126,6 +126,8 @@ jobs:
   publish-gh-release:
     name: Publish GitHub Release
     needs: npm-publish
+    permissions:
+      contents: write
     if: |
       needs.npm-publish.result == 'success' &&
       github.repository == 'homebridge-plugins/node-arlo' &&
@@ -146,7 +148,6 @@ jobs:
             v${{ needs.npm-publish.outputs.npm_version }}
 
             ${{ needs.npm-publish.outputs.release_notes }}
-
           keep_num: 5
           keep_tags: false
 
