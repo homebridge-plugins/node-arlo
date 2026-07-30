@@ -76,8 +76,8 @@ jobs:
           mkdir -p .github
           wget -q https://raw.githubusercontent.com/homebridge/.github/latest/.github/npm-version-script.js -O .github/npm-version-script.js
 
-          # Run the script to set base version (branch name, not full ref)
-          node .github/npm-version-script.js ${{ github.ref_name }} ${{ steps.release-type.outputs.type }}
+          # Run the script to set base version (script requires the full ref, not just the branch name)
+          node .github/npm-version-script.js ${{ github.ref }} ${{ steps.release-type.outputs.type }}
 
           # Add prerelease suffix
           npm version prerelease --preid=${{ steps.release-type.outputs.type }} --no-git-tag-version
@@ -143,6 +143,7 @@ jobs:
             v${{ needs.npm-publish.outputs.npm_version }}
 
             ${{ needs.npm-publish.outputs.release_notes }}
+
           keep_num: 5
           keep_tags: false
 
