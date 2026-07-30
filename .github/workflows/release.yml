@@ -31,7 +31,6 @@ jobs:
     outputs:
       npm_version: ${{ steps.pkg-version.outputs.version }}
       release_type: ${{ steps.release-type.outputs.type }}
-      release_notes: ${{ steps.gen-notes.outputs.notes }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -91,24 +90,6 @@ jobs:
         if: steps.release-type.outputs.type != 'none'
         run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
 
-      - name: Generate release notes
-        id: gen-notes
-        if: steps.release-type.outputs.type == 'beta' || steps.release-type.outputs.type == 'alpha'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          NOTES=$(gh api repos/${{ github.repository }}/releases/generate-notes \
-            -f tag_name="v${{ steps.pkg-version.outputs.version }}" \
-            --jq '.body' 2>/dev/null || echo "")
-          if [[ -z "$NOTES" ]]; then
-            echo "::warning::Could not auto-generate release notes; falling back to empty notes"
-          fi
-          {
-            echo "notes<<EOF"
-            echo "$NOTES"
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
-
       - name: Write job summary
         if: steps.release-type.outputs.type != 'none'
         run: |
@@ -144,12 +125,36 @@ jobs:
         with:
           tag_name: v${{ needs.npm-publish.outputs.npm_version }}
           release_name: v${{ needs.npm-publish.outputs.npm_version }}
-          body: |
-            v${{ needs.npm-publish.outputs.npm_version }}
-
-            ${{ needs.npm-publish.outputs.release_notes }}
+          body: v${{ needs.npm-publish.outputs.npm_version }}
           keep_num: 5
           keep_tags: false
+
+      - name: Generate release notes
+        id: gen-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NOTES=$(gh api repos/${{ github.repository }}/releases/generate-notes \
+            -f tag_name="v${{ needs.npm-publish.outputs.npm_version }}" \
+            --jq '.body' 2>/dev/null || echo "")
+          if [[ -z "$NOTES" ]]; then
+            echo "::warning::Could not auto-generate release notes; falling back to empty notes"
+          fi
+          {
+            echo "notes<<EOF"
+            echo "$NOTES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Update release body
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release edit "v${{ needs.npm-publish.outputs.npm_version }}" \
+            --repo "${{ github.repository }}" \
+            --notes "v${{ needs.npm-publish.outputs.npm_version }}
+
+          ${{ steps.gen-notes.outputs.notes }}"
 
       - name: Write job summary
         run: |
