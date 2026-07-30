@@ -74,10 +74,10 @@ jobs:
         run: |
           # Download versioning script from homebridge/.github
           mkdir -p .github
-          wget -q https://raw.githubusercontent.com/homebridge/.github/latest/.github/npm-version-script-esm.js -O .github/npm-version-script-esm.js
+          wget -q https://raw.githubusercontent.com/homebridge/.github/latest/.github/npm-version-script.js -O .github/npm-version-script.js
 
           # Run the script to set base version (branch name, not full ref)
-          node .github/npm-version-script-esm.js ${{ github.ref_name }} ${{ steps.release-type.outputs.type }}
+          node .github/npm-version-script.js ${{ github.ref_name }} ${{ steps.release-type.outputs.type }}
 
           # Add prerelease suffix
           npm version prerelease --preid=${{ steps.release-type.outputs.type }} --no-git-tag-version
