@@ -1,5 +1,5 @@
 {
-    "name": "@homebridge-plugins/node-arlo",
+    "name": "node-arlo",
     "version": "1.4.0",
     "author": "homebridge-plugins",
     "description": "JS library for Arlo Cameras",
