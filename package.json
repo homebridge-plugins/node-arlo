@@ -19,5 +19,10 @@
         "arlo",
         "js",
         "node"
-    ]
+    ],
+    "scripts": {
+        "lint": "echo \"TODO: No linting configured\"",
+        "test": "echo \"TODO: No tests configured\"",
+        "build": "echo \"TODO: No build step configured\""
+    }
 }
