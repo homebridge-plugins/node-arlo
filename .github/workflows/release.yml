@@ -10,8 +10,8 @@ on:
     types: [published]
   push:
     branches:
-      - beta-*.*.*
-      - alpha-*.*.*
+      - 'beta-*.*.*'
+      - 'alpha-*.*.*'
 
 permissions:
   id-token: write
@@ -24,9 +24,14 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  publish:
+  npm-publish:
+    name: Publish to npm
     if: ${{ github.repository == 'homebridge-plugins/node-arlo' }}
     runs-on: ubuntu-latest
+    outputs:
+      npm_version: ${{ steps.pkg-version.outputs.version }}
+      release_type: ${{ steps.release-type.outputs.type }}
+      release_notes: ${{ steps.gen-notes.outputs.notes }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -41,7 +46,7 @@ jobs:
         run: npm install -g npm@latest
 
       - name: Install dependencies
-        run: npm i
+        run: npm ci
 
       - name: Run lint
         run: npm run lint
@@ -50,17 +55,17 @@ jobs:
         id: release-type
         run: |
           if [[ "${{ github.event_name }}" == "release" ]]; then
-            echo "type=latest" >> $GITHUB_OUTPUT
-            echo "tag=latest" >> $GITHUB_OUTPUT
+            echo "type=latest" >> "$GITHUB_OUTPUT"
+            echo "tag=latest" >> "$GITHUB_OUTPUT"
           elif [[ "${{ github.ref }}" == refs/heads/beta-* ]]; then
-            echo "type=beta" >> $GITHUB_OUTPUT
-            echo "tag=beta" >> $GITHUB_OUTPUT
+            echo "type=beta" >> "$GITHUB_OUTPUT"
+            echo "tag=beta" >> "$GITHUB_OUTPUT"
           elif [[ "${{ github.ref }}" == refs/heads/alpha-* ]]; then
-            echo "type=alpha" >> $GITHUB_OUTPUT
-            echo "tag=alpha" >> $GITHUB_OUTPUT
+            echo "type=alpha" >> "$GITHUB_OUTPUT"
+            echo "tag=alpha" >> "$GITHUB_OUTPUT"
           else
-            echo "type=none" >> $GITHUB_OUTPUT
-            echo "tag=none" >> $GITHUB_OUTPUT
+            echo "type=none" >> "$GITHUB_OUTPUT"
+            echo "tag=none" >> "$GITHUB_OUTPUT"
             echo "No valid release type detected - skipping publish"
           fi
 
@@ -71,12 +76,83 @@ jobs:
           mkdir -p .github
           wget -q https://raw.githubusercontent.com/homebridge/.github/latest/.github/npm-version-script-esm.js -O .github/npm-version-script-esm.js
 
-          # Run the script to set base version
-          node .github/npm-version-script-esm.js ${{ github.ref }} ${{ steps.release-type.outputs.type }}
+          # Run the script to set base version (branch name, not full ref)
+          node .github/npm-version-script-esm.js ${{ github.ref_name }} ${{ steps.release-type.outputs.type }}
 
           # Add prerelease suffix
-          npm version pre --preid=${{ steps.release-type.outputs.type }} --no-git-tag-version
+          npm version prerelease --preid=${{ steps.release-type.outputs.type }} --no-git-tag-version
 
       - name: Publish to npm with OIDC
         if: steps.release-type.outputs.type != 'none'
         run: npm publish --tag ${{ steps.release-type.outputs.tag }} --provenance --access public
+
+      - name: Capture published version
+        id: pkg-version
+        if: steps.release-type.outputs.type != 'none'
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Generate release notes
+        id: gen-notes
+        if: steps.release-type.outputs.type == 'beta' || steps.release-type.outputs.type == 'alpha'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          NOTES=$(gh api repos/${{ github.repository }}/releases/generated-notes \
+            -f tag_name="v${{ steps.pkg-version.outputs.version }}" \
+            --jq '.body')
+          {
+            echo "notes<<EOF"
+            echo "$NOTES"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Write job summary
+        if: steps.release-type.outputs.type != 'none'
+        run: |
+          {
+            echo "### 📦 Published to npm"
+            echo ""
+            echo "| Field | Value |"
+            echo "|---|---|"
+            echo "| Version | \`${{ steps.pkg-version.outputs.version }}\` |"
+            echo "| Dist-tag | \`${{ steps.release-type.outputs.tag }}\` |"
+            echo "| Release type | \`${{ steps.release-type.outputs.type }}\` |"
+            echo "| npm | [view package](https://www.npmjs.com/package/$(node -p "require('./package.json').name")/v/${{ steps.pkg-version.outputs.version }}) |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  publish-gh-release:
+    name: Publish GitHub Release
+    needs: npm-publish
+    if: |
+      needs.npm-publish.result == 'success' &&
+      github.repository == 'homebridge-plugins/node-arlo' &&
+      (needs.npm-publish.outputs.release_type == 'beta' || needs.npm-publish.outputs.release_type == 'alpha')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Create nightly release
+        id: create_release
+        uses: viperproject/create-nightly-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ needs.npm-publish.outputs.npm_version }}
+          release_name: v${{ needs.npm-publish.outputs.npm_version }}
+          body: |
+            v${{ needs.npm-publish.outputs.npm_version }}
+
+            ${{ needs.npm-publish.outputs.release_notes }}
+          keep_num: 5
+          keep_tags: false
+
+      - name: Write job summary
+        run: |
+          {
+            echo "### 🏷️ GitHub Release Created"
+            echo ""
+            echo "| Field | Value |"
+            echo "|---|---|"
+            echo "| Tag | \`v${{ needs.npm-publish.outputs.npm_version }}\` |"
+            echo "| Release | [view release](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.npm-publish.outputs.npm_version }}) |"
+          } >> "$GITHUB_STEP_SUMMARY"
